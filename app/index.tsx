@@ -17,7 +17,7 @@ export default function RegisterScreen() {
 
   const onSubmit = async (data: RegisterSchema) => {
     const user = await createUser(data);
-    router.push("/(tabs)");
+    router.push("/(authenticated)/(tabs)");
   };
 
   return (

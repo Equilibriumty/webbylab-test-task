@@ -1,50 +1,111 @@
-# Welcome to your Expo app 👋
+# Movies Management App
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+A React Native mobile application built with Expo for managing movies. This app allows users to create, search, and manage their movie collection.
 
-## Get started
+## 🚀 Tech Stack
 
-1. Install dependencies
+- **Framework:** [Expo](https://expo.dev/) (v52)
+- **Language:** TypeScript
+- **UI Framework:** React Native
+- **Navigation:** Expo Router
+- **State Management:** React Query (TanStack Query)
+- **Form Handling:** React Hook Form with Zod validation
+- **Styling:** Native components with Expo styling
+- **Testing:** Jest
+- **Linting:** Biome
 
-   ```bash
-   npm install
-   ```
+## 📁 Project Structure
 
-2. Start the app
-
-   ```bash
-    npx expo start
-   ```
-
-In the output, you'll find options to open the app in a
-
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
-
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
-
-## Get a fresh project
-
-When you're ready, run:
-
-```bash
-npm run reset-project
+```
+.
+├── app/                    # Main application screens and navigation
+│   ├── (authenticated)     # Protected routes requiring authentication
+│   │   ├── (tabs)         # Bottom tab navigation screens
+│   │   └── movie          # Individual movie routes
+│   └── login.tsx          # Authentication screen
+├── components/            # Reusable UI components
+├── lib/                   # Core utilities and business logic
+│   ├── api/              # API integration layer
+│   └── validations/      # Form validation schemas
+├── assets/               # Static assets (images, fonts)
+├── constants/            # App-wide constants
+├── hooks/                # Custom React hooks
+└── scripts/             # Utility scripts
 ```
 
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
+## 🛠️ Setup and Installation
 
-## Learn more
+1. **Prerequisites**
+   - Node.js (LTS version)
+   - npm or yarn
+   - iOS Simulator or Android Emulator
+   - Expo Go app for physical device testing
 
-To learn more about developing your project with Expo, look at the following resources:
+2. **Installation**
+   ```bash
+   # Clone the repository
+   git clone [repository-url]
 
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
+   # Install dependencies
+   npm install
 
-## Join the community
+   # Start the development server
+   npm start
+   ```
 
-Join our community of developers creating universal apps.
+3. **Running on Devices**
+   - iOS: `npm run ios`
+   - Android: `npm run android`
+   - Web: `npm run web`
 
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+## 🏗️ Architecture
+
+### Navigation
+The app uses Expo Router for file-based navigation with the following structure:
+- Public routes (login)
+- Protected routes (authenticated)
+  - Tab-based navigation for main features
+  - Stack navigation for detailed views
+
+### State Management
+- React Query for server state management
+- Secure storage for authentication tokens
+- Form state handled by React Hook Form
+
+### API Integration
+- Axios for HTTP requests
+- Centralized API client configuration
+- Type-safe API responses
+
+### UI/UX
+- Native components enhanced with Expo libraries
+- Responsive layouts
+- Haptic feedback integration
+- Blur effects and modern UI elements
+
+## 📱 Features
+
+- User authentication
+- Movie creation and management
+- Movie search functionality
+- Responsive and modern UI
+- Form validation
+- Secure data storage
+
+## 🔧 Available Scripts
+
+- `npm start` - Start the Expo development server
+- `npm run ios` - Run on iOS simulator
+- `npm run android` - Run on Android emulator
+- `npm run web` - Run on web browser
+- `npm run lint` - Run linting
+- `npm test` - Run tests
+- `npm run reset-project` - Reset project to initial state
+
+## 📝 Environment Variables
+
+Create a `.env` file in the root directory with the following variables:
+```
+EXPO_PUBLIC_API_URL=your_api_url_here
+```
+
