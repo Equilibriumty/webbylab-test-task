@@ -25,8 +25,8 @@ export default function MovieDetailsScreen() {
   }
 
   return (
-    <ScrollView style={styles.container}>
-      <ThemedView style={styles.contentContainer}>
+    <ScrollView contentContainerStyle={styles.container}>
+      <ThemedView style={styles.container}>
         <ThemedView style={styles.infoContainer}>
           <ThemedText style={styles.label}>Year:</ThemedText>
           <ThemedText style={styles.info}>{data?.year}</ThemedText>
@@ -41,7 +41,9 @@ export default function MovieDetailsScreen() {
         <ThemedView style={styles.actorsContainer}>
           {data?.actors?.map((actor) => (
             <ThemedView key={actor.id} style={styles.actorCard}>
-              <ThemedText style={styles.actorName}>{actor.name}</ThemedText>
+              <ThemedText darkColor="#777" style={styles.actorName}>
+                {actor.name}
+              </ThemedText>
             </ThemedView>
           ))}
         </ThemedView>
