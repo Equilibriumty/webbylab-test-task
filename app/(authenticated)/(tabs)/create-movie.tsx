@@ -10,10 +10,12 @@ import { type CreateMovie, createMovieSchema } from "@/lib/validations/movie";
 import { Picker } from "@react-native-picker/picker";
 import { useCreateMovie } from "@/hooks/useCreateMovie";
 import { Input } from "@/components/ui/Input";
+import { useThemeColor } from "@/hooks/useThemeColor";
 
 export default function CreateMovieScreen() {
   const router = useRouter();
   const { mutate } = useCreateMovie();
+  const textColor = useThemeColor({}, "text");
 
   const {
     control,
@@ -75,7 +77,11 @@ export default function CreateMovieScreen() {
             control={control}
             name="format"
             render={({ field: { onChange, value } }) => (
-              <Picker selectedValue={value} onValueChange={onChange}>
+              <Picker
+                style={{ color: textColor }}
+                selectedValue={value}
+                onValueChange={onChange}
+              >
                 <Picker.Item label="DVD" value="DVD" />
                 <Picker.Item label="VHS" value="VHS" />
               </Picker>

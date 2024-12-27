@@ -16,7 +16,6 @@ export default function TabLayout() {
     const checkAuth = async () => {
       try {
         const token = await SecureStore.getItemAsync("token");
-        console.log(token);
         if (!token) {
           router.replace("/login");
         }

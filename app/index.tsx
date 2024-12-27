@@ -1,4 +1,4 @@
-import { StyleSheet, TextInput, Pressable } from "react-native";
+import { StyleSheet, TextInput, Pressable, Alert } from "react-native";
 
 import { ThemedText } from "@/components/ThemedText";
 import { ThemedView } from "@/components/ThemedView";
@@ -8,6 +8,7 @@ import { type RegisterSchema, registerSchema } from "@/lib/validations";
 import { createUser } from "@/lib/api/users";
 import { useRouter } from "expo-router";
 import { KeyboardAwareScrollView } from "react-native-keyboard-controller";
+import { Input } from "@/components/ui/Input";
 
 export default function RegisterScreen() {
   const router = useRouter();
@@ -16,8 +17,12 @@ export default function RegisterScreen() {
   });
 
   const onSubmit = async (data: RegisterSchema) => {
-    const user = await createUser(data);
-    router.push("/(authenticated)/(tabs)");
+    try {
+      const user = await createUser(data);
+      router.push("/(authenticated)/(tabs)");
+    } catch (error) {
+      Alert.alert("Failed to register", error?.message);
+    }
   };
 
   return (
@@ -30,10 +35,9 @@ export default function RegisterScreen() {
           name="email"
           render={({ field: { onChange, value }, fieldState: { error } }) => (
             <>
-              <TextInput
-                style={styles.input}
+              <Input
+                placeholderTextColor="#ccc"
                 placeholder="Email"
-                placeholderTextColor="#666"
                 autoCapitalize="none"
                 keyboardType="email-address"
                 onChangeText={onChange}
@@ -53,10 +57,9 @@ export default function RegisterScreen() {
           name="name"
           render={({ field: { onChange, value }, fieldState: { error } }) => (
             <>
-              <TextInput
-                style={styles.input}
-                placeholder="Email"
-                placeholderTextColor="#666"
+              <Input
+                placeholderTextColor="#ccc"
+                placeholder="Name"
                 autoCapitalize="none"
                 keyboardType="email-address"
                 onChangeText={onChange}
@@ -75,10 +78,9 @@ export default function RegisterScreen() {
           name="password"
           render={({ field: { onChange, value }, fieldState: { error } }) => (
             <>
-              <TextInput
-                style={styles.input}
+              <Input
+                placeholderTextColor="#ccc"
                 placeholder="Password"
-                placeholderTextColor="#666"
                 secureTextEntry
                 onChangeText={onChange}
                 value={value}
@@ -97,10 +99,9 @@ export default function RegisterScreen() {
           name="confirmPassword"
           render={({ field: { onChange, value }, fieldState: { error } }) => (
             <>
-              <TextInput
-                style={styles.input}
+              <Input
+                placeholderTextColor="#ccc"
                 placeholder="Confirm Password"
-                placeholderTextColor="#666"
                 secureTextEntry
                 onChangeText={onChange}
                 value={value}
@@ -135,6 +136,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     padding: 20,
+    gap: 10,
     justifyContent: "center",
   },
   title: {

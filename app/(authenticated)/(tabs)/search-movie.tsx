@@ -43,11 +43,6 @@ export default function SearchMoviesScreen() {
 
   const renderMovie = ({ item }: { item: Movie }) => <MovieItem {...item} />;
 
-  const renderFooter = () => {
-    if (!isLoading) return null;
-    return <ActivityIndicator size="large" style={{ padding: 20 }} />;
-  };
-
   const handleClearSearch = () => {
     setSearch("");
   };
@@ -71,7 +66,8 @@ export default function SearchMoviesScreen() {
             </Pressable>
           </ThemedView>
         </ThemedView>
-        {!data || (data?.pages && data?.pages.length === 0) ? (
+        {isLoading ? <ActivityIndicator size="large" /> : null}
+        {!isLoading && (!data || (data?.pages && data?.pages.length === 0)) ? (
           <NoMovies />
         ) : (
           <FlatList
@@ -80,7 +76,6 @@ export default function SearchMoviesScreen() {
             keyExtractor={(item) => item?.id.toString()}
             onEndReached={loadMore}
             onEndReachedThreshold={0.5}
-            ListFooterComponent={renderFooter}
             contentContainerStyle={{ flexGrow: 1 }}
           />
         )}

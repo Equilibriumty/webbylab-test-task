@@ -18,8 +18,7 @@ export const getMovies = async ({
   );
 
   if (response.data.error) {
-    Alert.alert("response.data.error", JSON.stringify(response.data.error));
-    return;
+    throw new Error(JSON.stringify(response.data.error));
   }
 
   return response.data.data;
@@ -32,8 +31,7 @@ export const createMovie = async (dto: CreateMovie) => {
   );
 
   if (response.data.error) {
-    Alert.alert("response.data.error", JSON.stringify(response.data.error));
-    return;
+    throw new Error(JSON.stringify(response.data.error));
   }
 
   return response.data;
@@ -45,8 +43,7 @@ export const deleteMovie = async (id: Movie["id"]) => {
   );
 
   if (response.data.error) {
-    Alert.alert("response.data.error", JSON.stringify(response.data.error));
-    return;
+    throw new Error(JSON.stringify(response.data.error));
   }
 
   return response.data;
@@ -58,8 +55,7 @@ export const getMovie = async (id: Movie["id"]) => {
   );
 
   if (response.data.error) {
-    Alert.alert("response.data.error", JSON.stringify(response.data.error));
-    return;
+    throw new Error(JSON.stringify(response.data.error));
   }
   return response.data.data;
 };

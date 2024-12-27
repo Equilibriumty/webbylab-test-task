@@ -3,10 +3,11 @@ import { ThemedView } from "@/components/ThemedView";
 import { createSession } from "@/lib/api/users";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm, Controller } from "react-hook-form";
-import { TextInput, Pressable, StyleSheet } from "react-native";
+import { Pressable, StyleSheet, Alert } from "react-native";
 import { loginSchema, type LoginSchema } from "@/lib/validations";
 import { useRouter } from "expo-router";
 import { KeyboardAwareScrollView } from "react-native-keyboard-controller";
+import { Input } from "@/components/ui/Input";
 
 export default function LoginScreen() {
   const router = useRouter();
@@ -18,7 +19,9 @@ export default function LoginScreen() {
     try {
       await createSession(data);
       router.replace("/(authenticated)/(tabs)");
-    } catch (error) {}
+    } catch (error) {
+      Alert.alert("Failed to login", error?.message);
+    }
   };
 
   return (
@@ -30,10 +33,9 @@ export default function LoginScreen() {
           name="email"
           render={({ field: { onChange, value }, fieldState: { error } }) => (
             <>
-              <TextInput
-                style={styles.input}
+              <Input
+                placeholderTextColor="#ccc"
                 placeholder="Email"
-                placeholderTextColor="#666"
                 autoCapitalize="none"
                 keyboardType="email-address"
                 onChangeText={onChange}
@@ -53,10 +55,9 @@ export default function LoginScreen() {
           name="password"
           render={({ field: { onChange, value }, fieldState: { error } }) => (
             <>
-              <TextInput
-                style={styles.input}
+              <Input
+                placeholderTextColor="#ccc"
                 placeholder="Password"
-                placeholderTextColor="#666"
                 secureTextEntry
                 onChangeText={onChange}
                 value={value}
@@ -88,6 +89,7 @@ export default function LoginScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    gap: 10,
     padding: 20,
     justifyContent: "center",
   },
